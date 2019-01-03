@@ -1,0 +1,10 @@
+<% @comments.each do |comment|%>
+
+    <p>
+        <%= comment.user.email %>
+        <strong>Comentario: </strong>
+        <%= comment.comment %></li>
+    </p>
+    <br>
+
+<% end %>

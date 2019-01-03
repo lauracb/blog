@@ -1,0 +1,12 @@
+<h3>Agregar comentario</h3>
+
+<%= form_for([@post, @post.comments.build]) do |f| %>
+    <div class="form-group">
+        <label for="">Comentario</label>
+            <%= f.text_area :comment %>
+    
+        <p>
+            <%= f.button "Guardar comentario" %>
+        </p>
+    </div>
+<% end %>
