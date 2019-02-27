@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @posts = Post.all.order(:created_at)
+    @posts = Post.all.order(:created_at).paginate(page: params[:page], per_page: 6)
   end
 
   def new
@@ -14,16 +14,16 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to posts_path, notice: "Post created successfully"
+      redirect_to posts_path, notice: "El post fue creado exitosamente"
     else
-      flash[:alert] = "Post failed to be created. Try again"
+      flash[:alert] = "El post falló en crearse. Intenta de nuevo"
       render :new
     end
   end
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.order(created_at: :desc)
+    @comments = @post.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 2)
   end
 
   def edit

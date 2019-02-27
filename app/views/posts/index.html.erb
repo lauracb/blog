@@ -1,13 +1,72 @@
-<%= link_to "Nuevo Post", new_post_path%>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-brand">Blog</div> 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<% @posts.each do |post|%>
-<p><%= link_to post.title, post_path(post.id) %></p>
-<p><%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>
-<p>Cuerpo: <%= post.body %></p>
-<p>
-<%= link_to "Editar", edit_post_path(post) %>
-<%= link_to "Eliminar", post_path(post), method: :delete, data: {confirm: "Are you sure?"} %>
-</p>           
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+       
+        <%= link_to "Nuevo Post", new_post_path, class: "btn btn-sm btn-outline-success my-2 my-sm-0"%>
+        <%= render 'layouts/sign_in'%>
+    </div>
+    
+  </nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+    
+      <h1 class="display-3"><%=@posts.last.title%></h1>
+      <p>
+         <% if @posts.last.body.length > 250 %>
+            <%= truncate(@posts.last.body, length: 600) %>
+            <%= link_to "... Leer más", post_path(@posts.last.id), class:"btn btn-primary btn-lg"%>
+          <% else %>
+            <%= @posts.last.body %>
+          <% end %> 
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+    <% @posts.each do |post|%>
+      <div class="col-md-4">
+      
+      
+        <h2><%= link_to post.title, post_path(post.id) %></h2>
+        <p><%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>
+        <!-- /Este condicional es para truncar o cortar una cadena para mostrar cierta cantidad de caracteres en el index -->
+          <% if post.body.length > 250 %>
+            <%= truncate(post.body, length: 250) %>
+            <%= link_to "... Leer más", post_path(post.id)%>
+          <% else %>
+            <%= post.body %>
+          <% end %>          
+           <p>
+            <%= link_to "Editar", edit_post_path(post), class:"btn btn-primary btn-sm" %>
+            <%= link_to "Eliminar", post_path(post), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+        </p>
+          </p>
+        </div><!-- /.blog-post -->
+      
+        
 <% end %>
 
-<%= render 'layouts/sign_in' %>
+
+       
+      </div>
+    <nav class="blog-pagination">
+        <%= will_paginate @posts, params: { anchor: "posts" }, previous_label: '&laquo;', next_label: '&raquo;' %>
+      </nav>
+
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
