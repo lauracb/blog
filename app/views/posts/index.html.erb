@@ -1,40 +1,47 @@
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="navbar-brand">Blog</div> 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-       
-        <%= link_to "Nuevo Post", new_post_path, class: "btn btn-sm btn-outline-success my-2 my-sm-0"%>
-        <%= render 'layouts/sign_in'%>
-    </div>
-    
-  </nav>
-
 <main role="main">
-
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
-    
-      <h1 class="display-3"><%=@posts.last.title%></h1>
-      <p>
-         <% if @posts.last.body.length > 250 %>
-            <%= truncate(@posts.last.body, length: 600) %>
-            <%= link_to "... Leer más", post_path(@posts.last.id), class:"btn btn-primary btn-lg"%>
-          <% else %>
-            <%= @posts.last.body %>
-          <% end %> 
-      </p>
-    </div>
+  <div class="mt-4 pt-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+        <li class="breadcrumb-item"><a href="#lastpost">Último Post</a></li>
+        <li class="breadcrumb-item"><a href="#listpost">Lista de Posts</a></li>
+        <li class="breadcrumb-item">
+          <a href="#listpost">
+            <%= link_to "Nuevo Post", new_post_path %>
+          </a>
+        </li>
+        </ul>
+      </ol>
+    </nav>
   </div>
 
+<div class="jumbotron" id="lastpost">
   <div class="container">
+    <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <h3 class="display-3"><%=@posts.last.title%></h3>
+      <br>
+      <p class="text-justify">
+        <% if @posts.last.body.length > 250 %>
+          <%= truncate(@posts.last.body, length: 600) %>
+          <hr class="my-4">
+          <%= link_to "Leer más", post_path(@posts.last.id), class:"btn btn-outline-dark btn-lg"%>
+        <% else %>
+          <%= @posts.last.body %>
+          <hr class="my-4">
+        <% end %> 
+      </p>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+
+  <div class="container mt-5 pt-5" id="listpost">
     <!-- Example row of columns -->
     <div class="row">
     <% @posts.each do |post|%>
-      <div class="col-md-4">
+      <div class="col-md-4 mt-5">
       
       
         <h2><%= link_to post.title, post_path(post.id) %></h2>
@@ -43,8 +50,10 @@
           <% if post.body.length > 250 %>
             <%= truncate(post.body, length: 250) %>
             <%= link_to "... Leer más", post_path(post.id)%>
+            <hr class="my-4">
           <% else %>
             <%= post.body %>
+            <hr class="my-4">
           <% end %>          
            <p>
             <%= link_to "Editar", edit_post_path(post), class:"btn btn-primary btn-sm" %>
