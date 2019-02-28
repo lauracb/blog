@@ -1,13 +1,17 @@
 <main role="main">
   <div class="mt-4 pt-5">
-    <nav aria-label="breadcrumb">
+    <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Inicio</li>
-        <li class="breadcrumb-item"><a href="#lastpost">Último Post</a></li>
-        <li class="breadcrumb-item"><a href="#listpost">Lista de Posts</a></li>
+        <li class="breadcrumb-item active">Inicio</li>
+        <li class="breadcrumb-item">
+          <a href="#lastpost">
+            <%= link_to "Último Post", post_path(@lastpost.id), class:"breadcrumb-item" %>
+          </a>
+        </li>
+        <li class="breadcrumb-item"><a href="#listpost" class="breadcrumb-item" >Lista de Posts</a></li>
         <li class="breadcrumb-item">
           <a href="#listpost">
-            <%= link_to "Nuevo Post", new_post_path %>
+            <%= link_to "Nuevo Post", new_post_path, class:"breadcrumb-item"  %>
           </a>
         </li>
         </ul>
@@ -15,67 +19,73 @@
     </nav>
   </div>
 
-<div class="jumbotron" id="lastpost">
   <div class="container">
-    <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-      <h3 class="display-3"><%=@posts.last.title%></h3>
-      <br>
-      <p class="text-justify">
-        <% if @posts.last.body.length > 250 %>
-          <%= truncate(@posts.last.body, length: 600) %>
-          <hr class="my-4">
-          <%= link_to "Leer más", post_path(@posts.last.id), class:"btn btn-outline-dark btn-lg"%>
-        <% else %>
-          <%= @posts.last.body %>
-          <hr class="my-4">
-        <% end %> 
-      </p>
-    </div>
-    <div class="col-sm-1"></div>
-  </div>
-</div>
-
-  <div class="container mt-5 pt-5" id="listpost">
-    <!-- Example row of columns -->
-    <div class="row">
-    <% @posts.each do |post|%>
-      <div class="col-md-4 mt-5">
-      
-      
-        <h2><%= link_to post.title, post_path(post.id) %></h2>
-        <p><%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>
-        <!-- /Este condicional es para truncar o cortar una cadena para mostrar cierta cantidad de caracteres en el index -->
-          <% if post.body.length > 250 %>
-            <%= truncate(post.body, length: 250) %>
-            <%= link_to "... Leer más", post_path(post.id)%>
-            <hr class="my-4">
-          <% else %>
-            <%= post.body %>
-            <hr class="my-4">
-          <% end %>          
-           <p>
-            <%= link_to "Editar", edit_post_path(post), class:"btn btn-primary btn-sm" %>
-            <%= link_to "Eliminar", post_path(post), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
-        </p>
-          </p>
-        </div><!-- /.blog-post -->
-      
-        
-<% end %>
-
-
-       
+    <div class="jumbotron mt-4" id="lastpost">
+      <div class="row">
+        <div class="col-sm-1"></div>
+          <div class="col-sm-10">
+            <h3 class="display-3"><%=@lastpost.title%></h3>
+            <br>
+            <p class="text-justify">
+              <% if @lastpost.body.length > 250 %>
+                <%= truncate(@lastpost.body, length: 600) %>
+                <hr class="my-4">
+                <%= link_to "Leer más", post_path(@lastpost.id), class:"btn btn-outline-light btn-lg"%>
+              <% else %>
+                <%= @lastpost.body %>
+                <hr class="my-4">
+              <% end %> 
+            </p>
+          </div>
+        <div class="col-sm-1"></div>
       </div>
-    <nav class="blog-pagination">
-        <%= will_paginate @posts, params: { anchor: "posts" }, previous_label: '&laquo;', next_label: '&raquo;' %>
-      </nav>
-
     </div>
+  </div>
 
-    <hr>
+  <hr class="my-4">
 
-  </div> <!-- /container -->
-
+  <div class="container mt-3" id="listpost">
+    <div class="row">
+      <h1 id="lista" class="display-4 mt-3">Lista de Posts</h1>
+    </div>
+    <div class="row">
+      <br>
+      <% @posts.each do |post|%>
+        <div class="col-sm-4 mt-5">
+          <div class="card p-4">
+            <div class="body">
+              <h2 class="card-title"><%= link_to post.title, post_path(post.id) %></h2>
+              <p id="date" class="card-subtitle mt-3 font-weight-light text-muted text "><%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>
+                <hr class="my-4">
+                <% if post.body.length > 250 %>
+                  <p class="text-justify"><%= truncate(post.body, length: 250)%>
+                  <%= link_to "Leer más", post_path(post.id)%></p>
+                  <hr class="my-4">
+                <% else %>
+                  <p class="text-justify"><%= post.body%></p>
+                  <hr class="my-4">
+                <% end %>          
+                <p>
+                  <% if user_signed_in?%>
+                    <%= link_to "Editar", edit_post_path(post), class:"btn btn-outline-info btn-sm mb-1" %>
+                    <%= link_to "Eliminar", post_path(post), method: :delete, data: {confirm: "¿Estás seguro que deseas eliminar el post?"}, class:"btn btn-outline-danger btn-sm mb-1" %>
+                  <% end %>
+                </p>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <nav class="blog-pagination my-2 pagination justify-content-end">
+      <%= will_paginate @posts, params: { anchor: "posts" }, previous_label: '&laquo;', next_label: '&raquo;' %>
+    </nav>
+  </div>
+   <hr>
 </main>
+<footer>
+  <div>
+    <p class="text-center text-muted">Todos los derechos reservados.</p> 
+  </div>
+</footer>

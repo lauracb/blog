@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.order(:created_at).paginate(page: params[:page], per_page: 6)
+    @lastpost = Post.last
+    @user = current_user
   end
 
   def new

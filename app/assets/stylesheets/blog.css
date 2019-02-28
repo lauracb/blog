@@ -1,7 +1,42 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-image: linear-gradient(#BDE5EB, white) !important;
+}
+
+.breadcrumb {
+  background-color: #DFE7E8 !important;
+}
+
+.breadcrumb-item {
+  color: #0A5A64 !important;
+
+}
+
+.jumbotron {
+  background: linear-gradient( rgba(20, 160, 164, 0.6), rgba(0, 0, 0, 0.7)), url('https://static.vecteezy.com/system/resources/previews/000/236/975/non_2x/vector-decorative-floral-winter-background.jpg') no-repeat center top !important;
+    background-size: cover !important;
+    color: white;
+}
+
+#date {
+  font-size: 15px;
+}
+
+.card {
+  height: 29rem;
+  background-image: white !important;
+  font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  #lista {
+    color: #0A5A64 !important;
+  }
+
 .blog-pagination {
-    margin-bottom: 4rem;
-  }
-  .blog-pagination > .btn {
-    border-radius: 2rem;
-  }
+  margin-bottom: 4rem;
+}
+
+.blog-pagination > .btn {
+  border-radius: 2rem;
+}
 
