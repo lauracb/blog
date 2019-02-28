@@ -13,8 +13,7 @@ module ApplicationHelper
             hard_wrap: true,
             link_attributes: { rel: 'nofollow', target: "_blank" },
             space_after_headers: true,
-            fenced_code_blocks: true,   
-    disable_indented_code_blocks: true
+            fenced_code_blocks: true
         }
         Redcarpet::Markdown.new(renderer, options).render(content).html_safe
     end
