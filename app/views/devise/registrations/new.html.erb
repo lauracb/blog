@@ -2,9 +2,14 @@
   <div class="row">
     <div class="col-sm-4 offset-4 mt-5 pt-5 text-center">
     <h1 class="text-center mb-4">Registro</h1><br>
+    
 
+    
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+
+      <%= devise_error_messages!%>
+      <%= render 'layouts/alerts' %>
+
 
       <div class="field form-group">
         <strong><%= f.label :email %></strong><br />
