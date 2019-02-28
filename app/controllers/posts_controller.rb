@@ -58,7 +58,7 @@ class PostsController < ApplicationController
     def is_owner?
       @post = Post.find(params[:id])
       unless current_user == @post.user
-        redirect_to root_path
+        redirect_to root_path, alert: "No tienes los permisos para realizar esta acción"
       end
     end
 
