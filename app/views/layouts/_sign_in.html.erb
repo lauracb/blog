@@ -1,8 +1,0 @@
-<% if user_signed_in? %>
-  <%= link_to "Editar usuario", edit_user_registration_path, class: "btn btn-sm btn-outline-secondary" %>&nbsp;
-  <%= link_to 'Cerrar cuenta', destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline-danger"%>
-  <!-- You are logged in as <%#= current_user.email %> -->
-<% else %>
-  <%= link_to 'Ingresar', new_user_session_path, class: "btn btn-sm btn-outline-secondary" %>&nbsp;
-  <%= link_to 'Registrarse', new_user_registration_path, class: "btn btn-sm btn-outline-primary" %>
-<% end %>
