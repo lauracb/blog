@@ -2,7 +2,10 @@
 <%= form_for([@post, @post.comments.build]) do |f| %>
     <div class="form-group">
         <div>
-            <%= f.text_area :comment, class: "form-control input-lg", placeholder: "Deja tu comentario" %>
+            <%= f.text_area :comment, class: "form-control input-lg", placeholder: "Deja tu comentario", cols:"30", rows:"5" %>
+            <p id="markdown" class="my-3">
+                Soporta Markdown
+            </p>
         </div>
         <div class="mt-4 text-right">
             <%= f.submit "Guardar comentario", class:"btn btn-info btn-sm" %>

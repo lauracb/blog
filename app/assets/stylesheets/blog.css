@@ -47,3 +47,11 @@ body {
   font-size: 12px;
   text-align: right;
 }
+
+#markdown {
+  color: cornflowerblue !important;
+}
+
+#markdown:hover{
+  color: rebeccapurple !important;
+}

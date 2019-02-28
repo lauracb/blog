@@ -11,7 +11,7 @@
       <% end %>
     </p>
     <p class="text-justify">
-      <%= @post.body %>
+      <%= markdown(@post.body) %>
     </p>
 
     <% if signed_in?%>
