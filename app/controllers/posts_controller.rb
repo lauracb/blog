@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :is_owner?, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all.order(:created_at).paginate(page: params[:page], per_page: 6)
@@ -52,6 +53,13 @@ class PostsController < ApplicationController
   private
     def post_params
       params.require(:post).permit(:user_id, :title, :body)
+    end
+
+    def is_owner?
+      @post = Post.find(params[:id])
+      unless current_user == @post.user
+        redirect_to root_path
+      end
     end
 
 end
