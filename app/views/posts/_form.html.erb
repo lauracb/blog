@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-    <h1><%= title%></h1>
+    <div class="col-sm-8 offset-2 mt-5 pt-5">
+    <h1 class="my-4"><%= title%></h1>
       <%= form_for @post do |f| %>
         <% if @post.errors.any?%>
           <p>
@@ -18,16 +18,23 @@
         <% end %>
 
         <div class="form-group">
-          <label for="exampleFormControlInput1">Título:</label>
+          <label for="exampleFormControlInput1" class="my-4"><strong>Título:</strong></label>
           <%= f.text_field :title, class:"form-control input-lg" %>
         </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Descripción:</label>
+        <div class="form-group my-5">
+          <label for="exampleFormControlTextarea1"><strong>Descripción:</strong></label>
+          <div class="form-group">
           <%= f.text_area :body, class:"form-control input-lg"%>
+          </div>
         </div>
-        <div>
-        <%= f.submit form_title, class:"btn btn-primary"%>
+        <br>
+        <br>
+        <div class="text-right">
+        <%= f.submit form_title, class:"btn btn-info"%>
         </div>
+        <br>
+        <br>
+        <br>
       <% end %>
     </div>
   </div>

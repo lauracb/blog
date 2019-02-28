@@ -11,7 +11,7 @@
         <li class="breadcrumb-item"><a href="#listpost" class="breadcrumb-item" >Lista de Posts</a></li>
         <li class="breadcrumb-item">
           <a href="#listpost">
-            <%= link_to "Nuevo Post", new_post_path, class:"breadcrumb-item"  %>
+            <%= link_to "Crea tu Post", new_post_path, class:"breadcrumb-item"  %>
           </a>
         </li>
         </ul>
@@ -46,13 +46,15 @@
 
   <div class="container mt-3" id="listpost">
     <div class="row">
-      <h1 id="lista" class="display-4 mt-3">Lista de Posts</h1>
+      <div class="col-sm-8 offset-4">
+        <h1 id="lista" class="display-4 mt-3">Lista de Posts</h1>
+      </div>
     </div>
     <div class="row">
       <br>
       <% @posts.each do |post|%>
         <div class="col-sm-4 mt-5">
-          <div class="card p-4">
+          <div class="card p-4" id="card">
             <div class="body">
               <h2 class="card-title"><%= link_to post.title, post_path(post.id) %></h2>
               <p id="date" class="card-subtitle mt-3 font-weight-light text-muted text "><%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>

@@ -22,7 +22,7 @@ body {
   font-size: 15px;
 }
 
-.card {
+#card {
   height: 29rem;
   background-image: white !important;
   font-family: 'Roboto Condensed', sans-serif;
@@ -38,5 +38,13 @@ body {
 
 .blog-pagination > .btn {
   border-radius: 2rem;
+}
+
+.card {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.card footer{
+  font-size: 12px;
+  text-align: right;
 }
 

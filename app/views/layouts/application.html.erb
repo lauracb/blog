@@ -31,7 +31,7 @@
               <ul class="nav navbar navbar-right">
               <% if signed_in?%>
                 <li>
-                  <%= link_to "Salir", destroy_user_session_path, method: :delete, class:"btn btn-outline-danger my-2 my-sm-0" %>
+                  <%= link_to "Salir", destroy_user_session_path, method: :delete, data: {confirm: "¿Estás seguro que deseas salir?"}, class:"btn btn-outline-danger my-2 my-sm-0" %>
                 </li>
               <% else %>
                 <li class="mr-3"><%= link_to "Regístrate", new_user_registration_path, class:"btn btn-outline-primary my-2 my-sm-0" %></li>

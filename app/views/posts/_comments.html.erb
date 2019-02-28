@@ -1,10 +1,22 @@
-<% @comments.each do |comment|%>
-
-    <p>
-        <%= comment.user.email %>
-        <strong>Comentario: </strong>
-        <%= comment.comment %></li>
-    </p>
-    <br>
-
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 offset-2">
+      <% @comments.each do |comment|%>
+        <div class="card">
+        <div class="card-header">
+              <%= comment.user.email %>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+          <p><%= comment.comment %></p>
+          <footer class="blockquote-footer">
+            <%= time_ago_in_words(comment.created_at) %> ago
+          </footer>
+          </blockquote>
+        </div>
+        </div>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>
