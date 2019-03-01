@@ -19,4 +19,11 @@
       <% end %>
     </div>
   </div>
+
+<nav class="blog-pagination my-2 pagination justify-content-center">
+        <%= will_paginate @comments, params: { anchor: "comments" }, previous_label: '&laquo;', next_label: '&raquo;' %>
+</nav>
+
 </div>
+
+
