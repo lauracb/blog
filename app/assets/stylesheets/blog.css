@@ -55,3 +55,7 @@ body {
   #markdown:hover{
     color: rebeccapurple !important;
   }
+
+  #bodypost {
+    text-align: justify;
+  }
