@@ -31,7 +31,7 @@
               <% if @lastpost.body.length > 250 %>
                 <%= truncate(@lastpost.body, length: 600) %>
                 <hr class="my-4">
-                <%= link_to "Leer más", post_path(@lastpost.id), class:"btn btn-outline-light btn-lg"%>
+                <%= link_to "Leer más", post_path(@lastpost.id), class:"btn btn-outline-dark btn-lg"%>
               <% else %>
                 <%= @lastpost.body %>
                 <hr class="my-4">
