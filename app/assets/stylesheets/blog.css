@@ -57,5 +57,5 @@ body {
   }
 
   #bodypost {
-    text-align: justify;
+    text-align: justify !important;
   }

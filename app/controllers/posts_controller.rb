@@ -27,6 +27,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 2)
+    @user = current_user
   end
 
   def edit

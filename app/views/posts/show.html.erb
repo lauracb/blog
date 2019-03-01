@@ -5,7 +5,7 @@
     <h2 class="display-4"><%= @post.title %></h2>
     <p class="text-muted">Hace <%= time_ago_in_words(@post.created_at) %> por:  <%= @post.user.email %></p>
     <p class="text-right">
-      <% if user_signed_in? && current_user == @post.user%>
+      <% if user_signed_in? && @user == @post.user%>
       <%= link_to "Editar", edit_post_path(@post), class:"btn btn-outline-info btn-sm mb-1" %>
       <%= link_to "Eliminar", post_path(@post), method: :delete, data: {confirm: "¿Estás seguro que deseas eliminar el post?"}, class:"btn btn-outline-danger btn-sm mb-1" %>
       <% end %>
